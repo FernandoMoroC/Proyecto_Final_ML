@@ -1,74 +1,16 @@
 [project]
-name = "ml-pipeline"
+name = "proyecto-final-ml"
 version = "0.1.0"
-description = "Proyecto de Machine Learning completo: desde los datos hasta la producción"
+description = "proyecto final ML desde los datos a la productivizacion"
 readme = "README.md"
-requires-python = ">=3.12"
-license = { text = "MIT" }
-
+requires-python = ">=3.11"
 dependencies = [
-    # 🔹 Gestión y procesamiento de datos
-    "pandas>=2.2.2",
-    "numpy>=1.26.4",
-    "openpyxl>=3.1.2",
-    "pyarrow>=15.0.2",
-
-    # 🔹 Exploración de datos (EDA)
+    "imbalanced-learn>=0.14.0",
+    "keras>=3.11.2",
+    "matplotlib>=3.10.5",
+    "numpy>=2.3.2",
+    "pandas>=2.3.1",
+    "scikit-learn>=1.7.1",
     "seaborn>=0.13.2",
-    "matplotlib>=3.9.0",
-    "scipy>=1.13.1",
-    "missingno>=0.5.2",
-    "pandas-profiling>=3.6.6",
-    "sweetviz>=2.3.1",
-
-    # 🔹 Modelado de Machine Learning
-    "scikit-learn>=1.5.0",
-    "xgboost>=2.0.3",
-    "lightgbm>=4.3.0",
-    "catboost>=1.2.5",
-
-    # 🔹 Deep Learning
-    "tensorflow>=2.16.1",
-    "torch>=2.3.0",
-    "torchvision>=0.18.0",
-
-    # 🔹 Visualización avanzada
-    "plotly>=5.21.0",
-    "yellowbrick>=1.5",
-    "bokeh>=3.4.1",
-
-    # 🔹 MLOps y experimentación
-    "mlflow>=2.12.1",
-    "dvc>=3.50.1",
-    "optuna>=3.6.1",
-
-    # 🔹 Producción API
-    "fastapi>=0.111.0",
-    "uvicorn>=0.30.0",
-    "gunicorn>=22.0.0",
-    "joblib>=1.4.2",
-    "pydantic>=2.7.1",
-
-    # 🔹 Utilidades generales
-    "tqdm>=4.66.4",
-    "hydra-core>=1.3.2",
-    "python-dotenv>=1.0.1",
-    "loguru>=0.7.2",
+    "tensorflow>=2.20.0",
 ]
-
-[project.optional-dependencies]
-dev = [
-    "ipykernel>=6.29.4",
-    "jupyterlab>=4.2.1",
-    "notebook>=7.2.1",
-    "pytest>=8.2.2",
-    "black>=24.4.2",
-    "isort>=5.13.2",
-    "pre-commit>=3.7.0",
-    "ruff>=0.4.7",
-    "mypy>=1.10.0",
-]
-
-[build-system]
-requires = ["setuptools>=69.0", "wheel"]
-build-backend = "setuptools.build_meta"

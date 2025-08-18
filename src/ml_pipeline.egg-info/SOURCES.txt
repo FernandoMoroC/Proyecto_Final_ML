@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-src/ml_pipeline.egg-info/PKG-INFO
-src/ml_pipeline.egg-info/SOURCES.txt
-src/ml_pipeline.egg-info/dependency_links.txt
-src/ml_pipeline.egg-info/requires.txt
-src/ml_pipeline.egg-info/top_level.txt
