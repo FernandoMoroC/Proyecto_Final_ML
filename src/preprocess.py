@@ -338,4 +338,68 @@ def tokenize_column(df: pd.DataFrame, column:str)-> pd.DataFrame:
     return df
 
 
+# STATE FUNCTION
 
+def company_type_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
+
+    ''' 
+    This function groups queries by type of business operation.
+    '''
+
+    product_to_group_single = {
+    'Credit reporting': 'Bureau',
+    'Mortgage': 'Lender',
+    'Consumer loan': 'Lender',
+    'Student loan': 'Lender',
+    'Payday loan': 'Lender',
+    'Bank account or service': 'Bank',
+    'Credit card': 'Bank',
+    'Prepaid card': 'Bank',
+    'Debt collection': 'Collector',
+    'Money transfers': 'Fintech',
+    'Other financial service': 'Other'
+}
+    df["Company_type"] = df[column].map(product_to_group_single)
+    df = df.drop(columns=[column])
+    return df
+    
+
+
+
+def company_type(df_train: pd.DataFrame, df_test: pd.DataFrame, column:str) -> pd.DataFrame:
+
+    ''' 
+    This function groups queries by type of business operation.
+    '''
+
+    product_to_group_single = {
+    'Credit reporting': 'Bureau',
+    'Mortgage': 'Lender',
+    'Consumer loan': 'Lender',
+    'Student loan': 'Lender',
+    'Payday loan': 'Lender',
+    'Bank account or service': 'Bank',
+    'Credit card': 'Bank',
+    'Prepaid card': 'Bank',
+    'Debt collection': 'Collector',
+    'Money transfers': 'Fintech',
+    'Other financial service': 'Other'
+}
+    df_train["Company_type"] = df_train[column].map(product_to_group_single)
+    df_test["Company_type"] = df_test[column].map(product_to_group_single)
+
+    from sklearn.preprocessing import OneHotEncoder
+
+    encoder = OneHotEncoder(sparse_output= False, dtype=int)
+
+    # Regions
+    train_encoded_company_type = encoder.fit_transform(df_train[["Company_type"]])
+    test_encoded_company_type = encoder.transform(df_test[["Company_type"]])
+
+    df_train_ohe = pd.DataFrame(train_encoded_company_type, columns=encoder.get_feature_names_out(["Company_type"]), index=df_train.index)
+    df_test_ohe = pd.DataFrame(test_encoded_company_type, columns=encoder.get_feature_names_out(["Company_type"]), index=df_test.index)
+
+    df_train = pd.concat([df_train.drop(columns=["Product"]), df_train_ohe], axis=1)
+    df_test = pd.concat([df_test.drop(columns=["Product"]), df_test_ohe], axis=1)
+
+    return df_train, df_test
