@@ -157,12 +157,11 @@ def get_county_from_zip(df: pd.DataFrame, zip_code_column: str) -> pd.DataFrame:
 
 ## DATE FUNCTION
 
-def date_converter(df: pd.DataFrame, *args: str) -> pd.DataFrame:
+def date_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
     ''' 
     Transform the columns into datetime pandas format 
     '''
-    for col in args:
-        df[col] = pd.to_datetime(df[col], errors = "coerce")
+    df[column] = pd.to_datetime(df[column], errors = "coerce")
     
     return df
 
@@ -219,6 +218,7 @@ def region_and_division(df: pd.DataFrame, column_state:str) -> pd.DataFrame:
     df["regions"] = df[column_state].map(state_to_region).fillna("No state")
     df["divisions"] = df[column_state].map(state_to_division).fillna("No state")
     df = df.drop(columns=[column_state])
+    return df
 
 
 
@@ -338,7 +338,7 @@ def tokenize_column(df: pd.DataFrame, column:str)-> pd.DataFrame:
     return df
 
 
-# STATE FUNCTION
+# Company FUNCTION
 
 def company_type_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
 
