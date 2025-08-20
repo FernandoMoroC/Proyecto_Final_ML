@@ -176,10 +176,52 @@ def day_of_week_and_month(df: pd.DataFrame, column_date: str) -> pd.DataFrame:
     df[f'{column_date}_day_of_month'] = df[column_date].dt.day
     df[f'{column_date}_day_week'] = df[column_date].dt.day_of_week
     df[f'{column_date}_weekend'] = df[f'{column_date}_day_week'].apply(lambda x: 1 if (x == 5) | (x == 6) else 0)
+    df = df.drop(columns=[column_date])
     return df
 
 
 # STATE FUNCTION
+
+def region_and_division(df: pd.DataFrame, column_state:str) -> pd.DataFrame:
+
+    ''' 
+    Esta función mapea los valores de las siglas de estado en una columna del
+    dataFrame de entrada y crea dos nuevas columnas que corresponden a las regiones
+    y las divisiones a las que pertenecen dichos estados
+    
+    '''
+    # Diccionary state -> region
+    state_to_region = {'CT': 'Northeast','ME': 'Northeast','MA': 'Northeast','NH': 'Northeast','RI': 'Northeast','VT': 'Northeast',
+        'NJ': 'Northeast','NY': 'Northeast','PA': 'Northeast','IL': 'Midwest', 'IN': 'Midwest', 'MI': 'Midwest','OH': 'Midwest',
+        'WI': 'Midwest','IA': 'Midwest','KS': 'Midwest','MN': 'Midwest','MO': 'Midwest','NE': 'Midwest','ND': 'Midwest','SD': 'Midwest',
+        'DE': 'South','FL': 'South','GA': 'South','MD': 'South','NC': 'South','SC': 'South', 'VA': 'South','WV': 'South',
+        'AL': 'South', 'KY': 'South','MS': 'South','TN': 'South','AR': 'South','LA': 'South','OK': 'South','TX': 'South',
+        'AZ': 'West','CO': 'West','ID': 'West','MT': 'West','NV': 'West','NM': 'West','UT': 'West','WY': 'West','AK': 'West',
+        'CA': 'West','HI': 'West','OR': 'West','WA': 'West','DC': 'South'}
+
+
+    # Diccionary state -> division
+    state_to_division = {'CT': 'New England', 'ME': 'New England','MA': 'New England','NH': 'New England','RI': 'New England',
+        'VT': 'New England','NJ': 'Middle Atlantic','NY': 'Middle Atlantic','PA': 'Middle Atlantic','IL': 'East North Central',
+        'IN': 'East North Central','MI': 'East North Central','OH': 'East North Central','WI': 'East North Central',
+        'IA': 'West North Central','KS': 'West North Central','MN': 'West North Central','MO': 'West North Central',
+        'NE': 'West North Central','ND': 'West North Central','SD': 'West North Central','DE': 'South Atlantic',
+        'FL': 'South Atlantic','GA': 'South Atlantic','MD': 'South Atlantic','NC': 'South Atlantic',
+        'SC': 'South Atlantic','VA': 'South Atlantic','WV': 'South Atlantic','DC': 'South Atlantic',
+        'AL': 'East South Central','KY': 'East South Central','MS': 'East South Central','TN': 'East South Central',
+        'AR': 'West South Central','LA': 'West South Central','OK': 'West South Central','TX': 'West South Central',
+        'AZ': 'Mountain','CO': 'Mountain','ID': 'Mountain','MT': 'Mountain','NV': 'Mountain','NM': 'Mountain','UT': 'Mountain','WY': 'Mountain',
+        'AK': 'Pacific','CA': 'Pacific','HI': 'Pacific','OR': 'Pacific','WA': 'Pacific'}
+
+
+    # First, we transform the categories:
+
+    df["regions"] = df[column_state].map(state_to_region).fillna("No state")
+    df["divisions"] = df[column_state].map(state_to_division).fillna("No state")
+    df = df.drop(columns=[column_state])
+
+
+
 
 def region_and_division_creator(df_train: pd.DataFrame, df_test:pd.DataFrame, column_state:str) -> pd.DataFrame:
 
@@ -284,4 +326,16 @@ def preprocessing_text(text):
     words = cleaned_text.split()
     
     return [word for word in words if word not in STOP_WORDS]
+
+
+def tokenize_column(df: pd.DataFrame, column:str)-> pd.DataFrame:
+    ''' 
+    Esta función se utilizará para la limpieza de texto en 
+    el pipeline de procesamiento
+    '''
+    df[f"{column}_tokens"] = df[column].apply(preprocessing_text)
+    df = df.drop(columns=[column])
+    return df
+
+
 
