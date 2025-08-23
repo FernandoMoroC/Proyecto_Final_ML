@@ -17,4 +17,5 @@ dependencies = [
     "tensorflow<=2.20.0",
     "xgboost>=3.0.4",
     "scipy<1.13",
+    "skrub>=0.6.1",
 ]
