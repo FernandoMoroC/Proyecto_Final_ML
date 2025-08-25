@@ -18,4 +18,6 @@ dependencies = [
     "xgboost>=3.0.4",
     "scipy<1.13",
     "skrub>=0.6.1",
+    "ydata-profiling>=4.12.2",
+    "ipywidgets>=8.1.7",
 ]
