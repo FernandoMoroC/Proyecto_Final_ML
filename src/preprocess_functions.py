@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 import requests
 
+## SUbproduct filling Nan
+
+def fill_na(x):
+    return x.fillna("No Subproduct")
+
 # ZIP CODE FUNCTION
 
 def zip_to_string(x) -> pd.DataFrame:
