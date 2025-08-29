@@ -56,3 +56,6 @@ Con el data set preprocesado se realizó de nuevo una partición del 80% para en
 
 - Una búsqueda má amplia de hiperparámetros, especialmente en las técnicas de ensembles con votación, puede contribuir a que los errores cometidos por los diferentes algoritmos sean compensados y mejore la clasificación.
 
+# DEMOSTRACION PRACTICA
+
+[Modelo Predictivo](https://huggingface.co/spaces/FerMC/Modelo_clasificacion_reclamaciones)
