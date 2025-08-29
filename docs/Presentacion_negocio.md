@@ -35,6 +35,6 @@ Uso práctico e implementación:
 
 # EJEMPLO DE USO DEL MODELO
 
-![Resumen de Funcionamiento](/Images\funcionamiento_modelo_huggingFace.png)
+![Resumen de Funcionamiento](/Images/funcionamiento_modelo_huggingFace.png)
 
 
