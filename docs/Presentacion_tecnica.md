@@ -1,18 +1,25 @@
-# CONTEXTUALIZACION DEL PROBLEMA
+# DESARROLLO TÉCNICO
 
-### Respuestas
+---
+
+## CONTEXTUALIZACION TECNICA
 
 
 
+---
 
 # EXPLICACION DEL VALOR DEL MODELO
 
 
 
+---
 
 # BENEFICIOS Y APLICACIONES PRÁCTICAS
 
 
 
+---
 
-# VISUALIZACION DE RESULTADOS
+# DEMOSTRACION PRACTICA
+
+[Modelo Predictivo](https://huggingface.co/spaces/FerMC/Modelo_clasificacion_reclamaciones)

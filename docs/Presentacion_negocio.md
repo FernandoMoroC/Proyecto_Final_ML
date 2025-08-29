@@ -31,9 +31,10 @@ Uso práctico e implementación:
 2. El archivo descargado es subido a la plataforma del modelo.
 3. El archivo es procesado por el modelo y devuelve el mismo archivo pero con la información de como se clasifica la reclamación y la probabilidad de esa clasificación.
 
-
-
-
 ---
 
-# VISUALIZACION DE RESULTADOS
+# EJEMPLO DE USO DEL MODELO
+
+![Resumen de Funcionamiento](/Images\funcionamiento_modelo_huggingFace.png)
+
+
