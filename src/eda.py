@@ -4,7 +4,8 @@ import seaborn as sns
 
 def visualization_features(df: pd.DataFrame, *args: str,  bins=20):
     ''' 
-    Creation of bar plot for categorical features and histograms for numerical features
+    Creación de gráficos de barras para características 
+    categóricas e histogramas para características numéricas
     '''
     
     try:
@@ -34,8 +35,8 @@ def visualization_features(df: pd.DataFrame, *args: str,  bins=20):
 
 def missing_values(df: pd.DataFrame, *args) -> pd.DataFrame:
     ''' 
-    Gives a dataframe with features from the input dataframe and its missing values
-    '''
+    Proporciona un marco de datos con características del marco 
+    de datos de entrada y sus valores faltantes    '''
     missing_values_dict = {}
     for col in args:
         missing_values_dict[col] = df[col].isnull().sum()
