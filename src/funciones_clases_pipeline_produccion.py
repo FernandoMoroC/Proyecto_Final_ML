@@ -1,3 +1,6 @@
+
+## FUNCIONES Y CLASES UTILIZADAS EN EL PIPELINE
+
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
@@ -14,11 +17,17 @@ import numpy as np
 
 filling_na = FunctionTransformer(pr.fill_na,validate=False)
 
+# Rellena valores faltantes con la cadena "No Subproduct"
+  
+
 # data["Sub-product"] = filling_na.transform(data["Sub-product"])
 
-# Codificacion con Target Encoder y sustitución de la columna Sub-issue
+
 
 class FillEncodeColumn(BaseEstimator, TransformerMixin):
+    ''' 
+    Codificacion con Target Encoder y sustitución de la columna Sub-issue
+    '''
     def __init__(self, column, smooth="auto", cv=5, categories = "auto", random_state=42):
         self.column = column
         self.smooth = smooth
@@ -45,18 +54,27 @@ class FillEncodeColumn(BaseEstimator, TransformerMixin):
 
 ## Funciones Dates
 
+''' 
+Utiliza las funciones date_converter y day_of_week_and_month de archivo preprocess_functions
+Al contrario que el notebook de preprocessing, he incorporado el drop
+en la función, por lo que elimina la columna original al aplicar la función
+'''
+
 date_converter_received = FunctionTransformer(pr.date_converter, kw_args={"column": "Date received"}, validate=False)
 date_converter_sent = FunctionTransformer(pr.date_converter, kw_args={"column": "Date sent to company"}, validate=False)
 day_of_week_month_received = FunctionTransformer(pr.day_of_week_and_month, kw_args={"column_date": "Date received"}, validate = False)
 day_of_week_month_sent = FunctionTransformer(pr.day_of_week_and_month, kw_args={"column_date": "Date sent to company"}, validate = False)
 
-# Al contrario que el notebook de preprocessing, he incorporado el drop
-# en la función, por lo que elimina la columna original al aplicar la función
+
 
 
 ## Funciones Product
 
 class ProductEncoder(BaseEstimator, TransformerMixin):
+    ''' 
+    Crea variables OneHot encoder y elimina la variable original. Para la columna Product
+    
+    '''
 
     def __init__(self,column, sparse_output = False, dtype=int):
         self.column = column
@@ -84,9 +102,13 @@ class ProductEncoder(BaseEstimator, TransformerMixin):
 
 regions_and_divisions = FunctionTransformer(pr.region_and_division, kw_args={"column_state": "State"}, validate=False)
 
-# Las columnas de salida se llaman regions y divisions
+# Utiliza la funcion region_and_division del archivo de preprocess_functions.py
 
 class RegionDivisionEncoder(BaseEstimator, TransformerMixin):
+    ''' 
+    Crea variables OneHot encoder y elimina la variable original. Para la columna Product
+    
+    '''
     
     def __init__(self,column, sparse_output = False, dtype=int):
         self.column = column
@@ -115,7 +137,7 @@ class RegionDivisionEncoder(BaseEstimator, TransformerMixin):
 
 ## Functions Issue
 
-# Limpieza de texto
+# Limpieza de texto con la función tokenize_column del archivo preprocess_functions.py
 
 text_cleaner = FunctionTransformer(pr.tokenize_column,kw_args={"column": "Issue"}, validate=False)
 
@@ -172,7 +194,12 @@ class Word2VecVectorizer(BaseEstimator, TransformerMixin):
 
 company_type_converter = FunctionTransformer(pr.company_type_converter, kw_args={"column": "Product"})
 
+# Utiliza la función  company_type_converter del archivo preprocess_functions.py
 class Company_type_from_product(BaseEstimator, TransformerMixin):
+    ''' 
+    Crea variables OneHot encoder y elimina la variable original. Para la columna Product
+    
+    '''
 
     def __init__(self,column, sparse_output = False, dtype=int):
         self.column = column
@@ -203,6 +230,10 @@ class Company_type_from_product(BaseEstimator, TransformerMixin):
 ## ELIMINADO DE COLUMNAS
 
 class ColumnDropper(BaseEstimator, TransformerMixin):
+
+    ''' 
+    Elimina columnas de un dataFrame
+    '''
     def __init__(self, columns_to_drop=None):
         self.columns_to_drop = columns_to_drop
 

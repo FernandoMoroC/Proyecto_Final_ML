@@ -1,3 +1,6 @@
+##FUNCIONES USADAS EN EL PREPROCESAMIENTO DE LOS DATOS
+
+
 import pandas as pd
 import numpy as np
 import requests
@@ -5,14 +8,17 @@ import requests
 ## SUbproduct filling Nan
 
 def fill_na(x):
+    ''' 
+    Rellena valores faltantes con la cadena "No Subproduct"
+    '''
     return x.fillna("No Subproduct")
 
 # ZIP CODE FUNCTION
 
 def zip_to_string(x) -> pd.DataFrame:
     '''  
-    Transform values from the zip code column into strings. NaN values are not eliminated. When code lenght 
-    is 4, adds a zero in front of the code.
+    Transforma los valores de la columna de código postal en cadenas. 
+    Los valores NaN no se eliminan. Cuando la longitud del código es 4, se añade un cero delante del código.
     '''
     if pd.isna(x):
         return x  # devolver tal cual si es NaN
@@ -40,9 +46,9 @@ def zip_to_string(x) -> pd.DataFrame:
 def search_state_from_zip(df: pd.DataFrame, zip_code_column: str, state_column: str) -> pd.DataFrame:
 
     ''' 
-    This function searches, based on the postal code values, for the name of the state they belong 
-    to by using the Zippopotam API. If it is not found, it will give you a message saying that 
-    no matches were found.
+    Esta función busca, basándose en los valores del código postal, el nombre del estado al que pertenecen 
+    mediante la API de Zippopotam. Si no lo encuentra, mostrará un mensaje indicando que no se encontraron 
+    coincidencias.
     '''
 
     zip_codes_to_search = df[zip_code_column][df[state_column].isna() & df[zip_code_column].notna()]
@@ -72,9 +78,9 @@ def search_city_from_zip(df: pd.DataFrame, zip_code_column: str) -> pd.DataFrame
     from time import sleep
 
     ''' 
-    This function takes a DataFrame and a name of acoulm which contains zip codes from USA as inputs.
-    It searches the name of the city where the zip code is from, and returns a new column called 
-    "city_column" in the same DataFrame with the names of the cities. It uses the API zippopotam.
+    Esta función toma como entrada un DataFrame y el nombre de una columna que contiene códigos postales de 
+    EE. UU. Busca el nombre de la ciudad de donde proviene el código postal y devuelve una nueva columna 
+    llamada "city_column" en el mismo DataFrame con los nombres de las ciudades. Utiliza la API zippopotam.
     
     '''
 
@@ -107,9 +113,9 @@ def get_county_from_zip(df: pd.DataFrame, zip_code_column: str) -> pd.DataFrame:
     from time import sleep
 
     ''' 
-    This funcition take as input a DataFrame and a name of a column of Zip codes from USA, and return
-    the name of the county where thery are from in a new column called "county" in the same dataFrame.
-    It uses the zippopotam API and the federal communications commision API. 
+    Esta función toma como entrada un DataFrame y el nombre de una columna de códigos postales de EE. UU.,
+    y devuelve el nombre del condado de donde provienen en una nueva columna llamada "condado" dentro 
+    del mismo DataFrame. Utiliza la API de Zippopotam y la API de la Comisión Federal de Comunicaciones. 
     '''
 
     zip_codes_list = df[zip_code_column].dropna().unique()
@@ -164,7 +170,7 @@ def get_county_from_zip(df: pd.DataFrame, zip_code_column: str) -> pd.DataFrame:
 
 def date_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
     ''' 
-    Transform the columns into datetime pandas format 
+    Transformar las columnas al formato de fecha y hora de Pandas 
     '''
     df[column] = pd.to_datetime(df[column], errors = "coerce")
     
@@ -173,8 +179,8 @@ def date_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
 
 def day_of_week_and_month(df: pd.DataFrame, column_date: str) -> pd.DataFrame:
     ''' 
-    Creates 3 columns from a datetime column. Column 1 contains the day of the month,
-    column 2 contains the day of the week, column 3 contains if the day was weekend or it wasn't 
+    Crea tres columnas a partir de una columna de fecha y hora. La columna 1 contiene el día del mes, 
+    la columna 2 el día de la semana y la columna 3 indica si el día fue fin de semana o no.
     '''
 
     df[f'{column_date}_day_of_month'] = df[column_date].dt.day
@@ -231,8 +237,9 @@ def region_and_division(df: pd.DataFrame, column_state:str) -> pd.DataFrame:
 def region_and_division_creator(df_train: pd.DataFrame, df_test:pd.DataFrame, column_state:str) -> pd.DataFrame:
 
     ''' 
-    This functions creates onehot 2 columns with The U.S. Census Bureau criteria from abbreviature of US states and
-    terrotories. Column 1 is the region and column 2 is division.
+    Esta función crea dos columnas con los criterios de la Oficina del Censo de EE. UU. a partir de 
+    la abreviatura de estados y territorios de EE. UU. La columna 1 corresponde a la región y 
+    la columna 2 a la división.
     
     '''
     # Diccionary state -> region
@@ -305,13 +312,14 @@ def preprocessing_text(text):
 
     from spacy.lang.en.stop_words import STOP_WORDS
     ''' 
-    This function preprocesses the input text by:
-    - Converting to lowercase
-    - Replacing commas with spaces
-    - Keeping apostrophes as is
-    - Removing all other punctuation characters
-    - Removing stopwords
-    Returns the cleaned text as a single string.
+    Esta función preprocesa el texto de entrada mediante:
+    - Conversión a minúsculas
+    - Reemplazo de comas por espacios
+    - Mantiene los apóstrofes sin cambios
+    - Eliminación de todos los demás caracteres de puntuación
+    - Eliminación de palabras vacías
+
+    Devuelve el texto limpio como una sola cadena.
     '''
     text = text.lower()
     
@@ -348,7 +356,7 @@ def tokenize_column(df: pd.DataFrame, column:str)-> pd.DataFrame:
 def company_type_converter(df: pd.DataFrame, column:str) -> pd.DataFrame:
 
     ''' 
-    This function groups queries by type of business operation.
+    Esta función agrupa las consultas por tipo de operación comercial.
     '''
 
     product_to_group_single = {
