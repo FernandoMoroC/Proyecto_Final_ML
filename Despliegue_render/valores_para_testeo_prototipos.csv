@@ -1,0 +1,12 @@
+Complaint ID,Product,Sub-product,Issue,Sub-issue,State,ZIP code,Date received,Date sent to company,Company,Timely response?,Consumer disputed?
+1183129,Mortgage,Conventional adjustable mortgage (ARM),"Loan modification,collection,foreclosure",,CA,92101.0,2015-01-06,2015-01-12,Nationstar Mortgage,Yes,
+1218599,Debt collection,Payday loan,Improper contact or sharing of info,Contacted employer after asked not to,TX,76179.0,2015-01-30,2015-01-30,"National Credit Adjusters, LLC",Yes,
+1191178,Credit reporting,,Incorrect information on credit report,Reinserted previously deleted info,IA,51503.0,2015-01-11,2015-01-13,"First Investors Financial Services Group, Inc.",Yes,No
+1203256,Mortgage,Other mortgage,"Loan modification,collection,foreclosure",,VA,22101.0,2015-01-21,2015-01-27,"BWW Law Group, LLC",Yes,Yes
+1227431,Debt collection,,Cont'd attempts collect debt not owed,Debt is not mine,CA,91604.0,2015-02-05,2015-02-05,GE Capital Retail,Yes,Yes
+1233214,Bank account or service,Checking account,Using a debit or ATM card,,WI,53092.0,2015-02-10,2015-02-11,BMO Harris,Yes,
+1190177,Mortgage,Other mortgage,"Loan servicing, payments, escrow account",,AZ,85259.0,2015-01-12,2015-01-16,Citibank,Yes,
+1198303,Bank account or service,Other bank product/service,"Account opening, closing, or management",,TX,78832.0,2015-01-18,2015-01-22,PayPal,Yes,
+1230055,Bank account or service,Checking account,"Account opening, closing, or management",,CA,90245.0,2015-02-06,2015-02-06,U.S. Bancorp,Yes,
+1182047,Mortgage,Other mortgage,"Loan modification,collection,foreclosure",,FL,33157.0,2015-01-06,2015-01-09,"Select Portfolio Servicing, Inc",Yes,No
+1260066,Student loan,Non-federal student loan,Dealing with my lender or servicer,,GA,30082.0,2015-02-27,2015-02-27,Navient,Yes,

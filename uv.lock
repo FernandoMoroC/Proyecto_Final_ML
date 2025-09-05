@@ -1998,6 +1998,7 @@ name = "proyecto-final-ml"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "fastapi" },
     { name = "gensim" },
     { name = "gradio" },
     { name = "imbalanced-learn" },
@@ -2020,6 +2021,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "fastapi", specifier = ">=0.116.1" },
     { name = "gensim", specifier = ">=4.3.2" },
     { name = "gradio", specifier = ">=5.43.1" },
     { name = "imbalanced-learn", specifier = ">=0.14.0" },
