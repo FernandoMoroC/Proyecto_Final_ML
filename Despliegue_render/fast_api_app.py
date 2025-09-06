@@ -39,7 +39,7 @@ def predecir_valores(Complaint_ID:int, Product:str, Sub_product: str, Issue: str
         0: "La queja requiere compensación",
         1: "La queja no requiere compensación"
     })
-    return df
+    return df.to_dict(orient="records") # Hay que devolver un diccionario porque FastAPI no puede convertir un DataFrame directamente a json
 
 @app.get("/")
 def prediccion_reclamaciones():
